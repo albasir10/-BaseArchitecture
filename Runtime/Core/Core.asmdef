@@ -1,4 +1,4 @@
 {
-  "name": "CoreArchitecture",
-  "rootNamespace": "CoreArchitecture"
+  "name": "albatroneer.BaseArchitecture",
+  "rootNamespace": "albatroneer.BaseArchitecture"
 }
