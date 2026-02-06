@@ -1,7 +1,7 @@
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
-using albatroneer.BaseArchitecture.Events
+using albatroneer.BaseArchitecture.Events;
 
 namespace albatroneer.BaseArchitecture.Containers
 {
