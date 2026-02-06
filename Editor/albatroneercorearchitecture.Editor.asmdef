@@ -1,0 +1,10 @@
+{
+    "name": "albatroneer.corearchitecture.Editor",
+    "references": [
+      "albatroneer.corearchitecture"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

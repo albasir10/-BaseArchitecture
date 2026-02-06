@@ -1,0 +1,6 @@
+{
+    "name": "albatroneer.CoreArchitecture",
+    "references": ["VContainer"],
+    "includePlatforms": [],
+    "excludePlatforms": []
+}

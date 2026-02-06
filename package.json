@@ -1,17 +1,14 @@
 {
   "name": "com.albatroneer.corearchitecture",
-  "displayName": "Core Architecture",
+  "displayName": "com.albatroneer.corearchitecture",
   "version": "0.1.0",
-  "unity": "2021.3",
-  "description": "Base architecture for Unity projects",
-  "author": {
-    "name": "albatroneer"
+  "unity": "2021.2",
+  "unityRelease": "3f1",
+  "description": "Base Architecture",
+  "dependencies": {
+    "com.unity.test-framework": "1.6.0"
   },
-  "samples": [
-    {
-      "displayName": "Addressables Sample",
-      "description": "Example of using Addressables with the architecture",
-      "path": "Samples~/Addressables Sample"
-    }
-  ]
+  "author": {
+    "name": "albert"
+  }
 }
