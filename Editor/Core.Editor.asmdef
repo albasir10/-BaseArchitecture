@@ -1,0 +1,8 @@
+{
+  "name": "CoreArchitecture.Editor",
+  "rootNamespace": "CoreArchitecture.Editor",
+  "references": [
+    "CoreArchitecture"
+  ],
+  "includePlatforms": ["Editor"]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "com.albatroneer.corearchitecture",
+  "displayName": "Core Architecture",
+  "version": "0.1.0",
+  "unity": "2021.3",
+  "description": "Base architecture for Unity projects",
+  "author": {
+    "name": "albatroneer"
+  },
+  "samples": [
+    {
+      "displayName": "Addressables Sample",
+      "description": "Example of using Addressables with the architecture",
+      "path": "Samples~/Addressables Sample"
+    }
+  ]
+}
