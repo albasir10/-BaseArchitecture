@@ -12,6 +12,8 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
         protected override void Init()
         {
             View = GetComponent<T>();
+            
+            IsShowed = View.IsShow;
 
             PresenterInit(); 
         }

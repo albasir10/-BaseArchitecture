@@ -8,6 +8,8 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
     {
         protected Canvas Canvas;
 
+        public bool IsShow { get; private set; }
+
         private void Reset()
         {
             _priority = 1;
@@ -17,12 +19,16 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
         {
             Canvas = GetComponent<Canvas>();
 
+            IsShow = Canvas.enabled;
+
             ViewInit();
         }
         
         public virtual bool TryShow()
         {
             Show();
+
+            IsShow = true;
             
             return true;
         }
@@ -37,6 +43,8 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
         public virtual bool TryHide()
         {
             Hide();
+
+            IsShow = false;
             
             return true;
         }
