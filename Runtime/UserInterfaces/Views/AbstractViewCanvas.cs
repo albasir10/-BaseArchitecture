@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace albatroneer.CoreArchitecture.UserInterfaces
@@ -6,7 +7,12 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
     public abstract class AbstractViewCanvas : AbstractMonoBehaviour
     {
         protected Canvas Canvas;
-        
+
+        private void Reset()
+        {
+            _priority = 1;
+        }
+
         protected override void Init()
         {
             Canvas = GetComponent<Canvas>();

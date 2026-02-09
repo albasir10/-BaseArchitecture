@@ -8,7 +8,7 @@ namespace albatroneer.CoreArchitecture
     public abstract class AbstractMonoBehaviour : MonoBehaviour
     {
         [Range(0, 100)]
-        [SerializeField] private int _priority;
+        [SerializeField] protected int _priority;
 
         public int Priority => _priority;
 
