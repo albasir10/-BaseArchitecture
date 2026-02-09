@@ -3,21 +3,26 @@ using UnityEngine;
 namespace albatroneer.CoreArchitecture.UserInterfaces
 {
     [RequireComponent(typeof(AbstractViewCanvas))]
-    public abstract class AbstractPresenter : AbstractMonoBehaviour
+    public abstract class AbstractPresenter<T> : AbstractMonoBehaviour where T : AbstractViewCanvas
     {
-        protected AbstractViewCanvas View { get; private set; }
+        protected T View { get; private set; }
 
         protected bool IsShowed;
 
         protected override void Init()
         {
-            View = GetComponent<AbstractViewCanvas>();
+            View = GetComponent<T>();
 
             PresenterInit(); 
         }
 
         public bool TryShow()
         {
+            if (IsShowed)
+            {
+                return false;
+            }
+            
             View.TryShow();
 
             IsShowed = true;
@@ -33,14 +38,25 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
         }
 
         
-        public virtual void Hide()
+        public bool TryHide()
         {
-            if (IsShowed)
+            if (!IsShowed)
             {
-                View.Hide();
-            
-                IsShowed = false;
+                return false;
             }
+            
+            View.TryHide();
+            
+            Hide();
+            
+            IsShowed = false;
+
+            return true;
+        }
+
+        protected virtual void Hide()
+        {
+            
         }
 
         protected abstract void PresenterInit();

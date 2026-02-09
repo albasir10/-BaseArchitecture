@@ -14,20 +14,29 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
             ViewInit();
         }
         
-        public bool TryShow()
+        public virtual bool TryShow()
         {
-            Canvas.enabled = true;
-                
+            Show();
+            
             return true;
         }
 
+        [ContextMenu("Show")]
         protected virtual void Show()
         {
-            
+            Canvas.enabled = true;
         }
 
         [ContextMenu("Hide")]
-        public virtual void Hide()
+        public virtual bool TryHide()
+        {
+            Hide();
+            
+            return true;
+        }
+        
+        [ContextMenu("Hide")]
+        protected virtual void Hide()
         {
             Canvas.enabled = false;
         }
