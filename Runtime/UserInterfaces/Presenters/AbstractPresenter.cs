@@ -1,4 +1,6 @@
+using albatroneer.CoreArchitecture.Events;
 using UnityEngine;
+using VContainer;
 
 namespace albatroneer.CoreArchitecture.UserInterfaces
 {
@@ -8,6 +10,10 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
         protected T View { get; private set; }
 
         protected bool IsShowed;
+
+        [Inject] private IEventer _eventer;
+        
+        protected IEventer Eventer => _eventer;
 
         protected override void Init()
         {
