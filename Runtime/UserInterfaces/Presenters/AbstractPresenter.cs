@@ -15,7 +15,7 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
         
         protected IEventer Eventer => _eventer;
 
-        protected override void Init()
+        protected sealed override void Init()
         {
             View = GetComponent<T>();
             
@@ -70,7 +70,7 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
         protected abstract void PresenterInit();
         
 
-        protected override void Dispose()
+        protected sealed override void Dispose()
         {
             DisposePresenter();
         }

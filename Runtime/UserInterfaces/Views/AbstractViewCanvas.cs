@@ -15,7 +15,7 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
             _priority = 1;
         }
 
-        protected override void Init()
+        protected sealed override void Init()
         {
             Canvas = GetComponent<Canvas>();
 
@@ -56,6 +56,18 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
         }
 
         protected abstract void ViewInit();
+
+        protected sealed override void Dispose()
+        {
+            base.Dispose();
+
+            DisposeView();
+        }
+
+        protected virtual void DisposeView()
+        {
+            
+        }
     }
 }
 
