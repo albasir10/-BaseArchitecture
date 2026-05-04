@@ -1,8 +1,8 @@
-using albatroneer.CoreArchitecture.Events;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
-namespace albatroneer.CoreArchitecture.UserInterfaces
+namespace albatroneer.Core
 {
     [RequireComponent(typeof(AbstractViewCanvas))]
     public abstract class AbstractPresenter<T> : AbstractMonoBehaviour where T : AbstractViewCanvas
@@ -15,14 +15,18 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
         
         protected IEventer Eventer => _eventer;
 
-        protected sealed override void Init()
+        protected sealed override UniTask<bool> Init()
         {
             View = GetComponent<T>();
             
             IsShowed = View.IsShow;
 
             PresenterInit(); 
+            
+            return  UniTask.FromResult(true);
         }
+        
+        protected abstract void PresenterInit();
 
         public bool TryShow()
         {
@@ -31,7 +35,7 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
                 return false;
             }
             
-            View.TryShow();
+            View.TryShow(true);
 
             IsShowed = true;
 
@@ -53,7 +57,7 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
                 return false;
             }
             
-            View.TryHide();
+            View.TryHide(true);
             
             Hide();
             
@@ -67,18 +71,7 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
             
         }
 
-        protected abstract void PresenterInit();
-        
-
-        protected sealed override void Dispose()
-        {
-            DisposePresenter();
-        }
-
-        protected virtual void DisposePresenter()
-        {
-            
-        }
+       
     }
 }
 

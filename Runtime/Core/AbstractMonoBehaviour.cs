@@ -1,21 +1,14 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace albatroneer.CoreArchitecture
+namespace albatroneer.Core
 {
     /// <summary>
     /// custom MonoBehaviour with need functions, not use Awake/Start. Only Init()
     /// </summary>
-    public abstract class AbstractMonoBehaviour : MonoBehaviour
+    public abstract class AbstractMonoBehaviour : MonoBehaviour, IInitializable
     {
-        [Range(0, 100)]
-        [SerializeField] protected int _priority;
-
-        public int Priority => _priority;
-
-        protected bool _isInit = false;
-        
-
-        [field: SerializeField] public bool IsInject { get; private set; } = true; 
+        protected bool IsInitialized = false;
 
         /// <summary>
         /// Not Use, Use Init()
@@ -33,19 +26,19 @@ namespace albatroneer.CoreArchitecture
             return;
         }
 
-        public void TryInit()
+        public async UniTask<bool> TryInit()
         {
-            if (_isInit)
+            if (IsInitialized || !await Init())
             {
-                return;
+                return false;
             }
-
-            Init();
             
-            _isInit = true;
+            IsInitialized = true;
+            
+            return true;
         }
 
-        protected abstract void Init();
+        protected abstract UniTask<bool> Init();
 
         protected void OnDestroy()
         {

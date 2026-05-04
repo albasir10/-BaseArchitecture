@@ -1,8 +1,9 @@
 using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace albatroneer.CoreArchitecture.UserInterfaces
+namespace albatroneer.Core
 {
     [RequireComponent(typeof(Button))]
     public abstract class AbstractViewButton : AbstractMonoBehaviour
@@ -11,7 +12,7 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
         
         public event Action OnMainBtnPressed;
         
-        protected override void Init()
+        protected override UniTask<bool> Init()
         {
             MainBtn = GetComponent<Button>();
             
@@ -20,7 +21,11 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
             ViewInit();
             
             Unselected();
+            
+            return UniTask.FromResult(true);
         }
+        
+        protected abstract void ViewInit();
         
         public virtual void Unselected()
         {
@@ -42,7 +47,7 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
             MainBtn.interactable = interactable;
         }
 
-        protected abstract void ViewInit();
+
 
         protected virtual void MainBtnPressed()
         {

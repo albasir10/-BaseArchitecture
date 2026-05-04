@@ -1,6 +1,17 @@
 {
     "name": "albatroneer.CoreArchitecture",
-    "references": ["VContainer"],
+    "rootNamespace": "",
+    "references": [
+        "VContainer",
+        "UniTask"
+    ],
     "includePlatforms": [],
-    "excludePlatforms": []
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

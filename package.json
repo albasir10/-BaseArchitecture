@@ -9,6 +9,19 @@
     "com.unity.test-framework": "1.6.0"
   },
   "author": {
-    "name": "albert"
-  }
+    "name": "albert",
+    "url": "https://gitlab.com/albatroneer"
+  },
+  "samples": [
+    {
+      "displayName": "Init",
+      "description": "Init Example",
+      "path": "Samples~/Init Example"
+    },
+	    {
+      "displayName": "Debug",
+      "description": "Debug System",
+      "path": "Samples~/Debug System"
+    }
+  ]
 }

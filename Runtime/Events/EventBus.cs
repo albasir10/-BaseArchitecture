@@ -1,29 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using albatroneer.CoreArchitecture;
-using UnityEngine;
 
-namespace albatroneer.CoreArchitecture.Events
+namespace albatroneer.Core
 {
-    public class EventBus : AbstractMonoBehaviour, IEventer
+    public class EventBus : IEventer
     {
-        private struct Eventer
-        {
-            public int Priority;
-            public Delegate Delegates;
-        }
-
-        private struct EventerGuid
-        {
-            public int Priority;
-            public Delegate Delegates;
-            public Guid Guid;
-        }
-
-        private readonly Dictionary<Type, List<Eventer>> _listeners = new();
-        private readonly Dictionary<Type, List<EventerGuid>> _listenerGUIDs = new();
-        private readonly Dictionary<Type, List<Eventer>> _globalListeners = new();
+        private readonly Dictionary<Type, List<EventerMessage>> _listeners = new();
+        private readonly Dictionary<Type, List<EventerMessageWithGuid>> _listenerGUIDs = new();
+        private readonly Dictionary<Type, List<EventerMessage>> _globalListeners = new();
 
         public void Subscribe<T>(Action<T> callback, int priority = 0) where T : struct
         {
@@ -31,10 +16,10 @@ namespace albatroneer.CoreArchitecture.Events
 
             if (!_listeners.ContainsKey(type))
             {
-                _listeners[type] = new List<Eventer>();
+                _listeners[type] = new List<EventerMessage>();
             }
 
-            _listeners[type].Add(new Eventer() { Priority = priority, Delegates = callback });
+            _listeners[type].Add(new EventerMessage() { Priority = priority, Delegates = callback });
             _listeners[type].Sort((a, b) => b.Priority.CompareTo(a.Priority));
         }
 
@@ -44,10 +29,10 @@ namespace albatroneer.CoreArchitecture.Events
 
             if (!_listenerGUIDs.ContainsKey(type))
             {
-                _listenerGUIDs[type] = new List<EventerGuid>();
+                _listenerGUIDs[type] = new List<EventerMessageWithGuid>();
             }
 
-            _listenerGUIDs[type].Add(new EventerGuid() { Priority = priority, Delegates = callback, Guid = guid });
+            _listenerGUIDs[type].Add(new EventerMessageWithGuid() { Priority = priority, Delegates = callback, Guid = guid });
             _listenerGUIDs[type].Sort((a, b) => b.Priority.CompareTo(a.Priority));
         }
 
@@ -60,10 +45,10 @@ namespace albatroneer.CoreArchitecture.Events
 
             if (!_globalListeners.ContainsKey(type))
             {
-                _globalListeners[type] = new List<Eventer>();
+                _globalListeners[type] = new List<EventerMessage>();
             }
 
-            _globalListeners[type].Add(new Eventer() { Priority = priority, Delegates = callback });
+            _globalListeners[type].Add(new EventerMessage() { Priority = priority, Delegates = callback });
             _globalListeners[type].Sort((a, b) => b.Priority.CompareTo(a.Priority));
         }
 
@@ -165,6 +150,6 @@ namespace albatroneer.CoreArchitecture.Events
             }
         }
 
-        protected override void Init() { }
+       
     }
 }

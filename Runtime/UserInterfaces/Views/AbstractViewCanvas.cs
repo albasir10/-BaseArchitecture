@@ -1,7 +1,8 @@
 using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace albatroneer.CoreArchitecture.UserInterfaces
+namespace albatroneer.Core
 {
     [RequireComponent(typeof(Canvas))]
     public abstract class AbstractViewCanvas : AbstractMonoBehaviour
@@ -10,22 +11,27 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
 
         public bool IsShow { get; private set; }
 
-        private void Reset()
-        {
-            _priority = 1;
-        }
-
-        protected sealed override void Init()
+        protected sealed override UniTask<bool> Init()
         {
             Canvas = GetComponent<Canvas>();
 
             IsShow = Canvas.enabled;
 
             ViewInit();
+            
+            return UniTask.FromResult(true);
         }
         
-        public virtual bool TryShow()
+        protected abstract void ViewInit();
+
+        [ContextMenu("Show")]
+        public virtual bool TryShow(bool isForce = false)
         {
+            if (IsShow && !isForce)
+            {
+                return false;
+            }
+            
             Show();
 
             IsShow = true;
@@ -33,15 +39,20 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
             return true;
         }
 
-        [ContextMenu("Show")]
+        
         protected virtual void Show()
         {
             Canvas.enabled = true;
         }
-
+        
         [ContextMenu("Hide")]
-        public virtual bool TryHide()
+        public virtual bool TryHide(bool isForce = false)
         {
+            if (!IsShow && !isForce)
+            {
+                return false;
+            }
+            
             Hide();
 
             IsShow = false;
@@ -49,25 +60,13 @@ namespace albatroneer.CoreArchitecture.UserInterfaces
             return true;
         }
         
-        [ContextMenu("Hide")]
+        
         protected virtual void Hide()
         {
             Canvas.enabled = false;
         }
 
-        protected abstract void ViewInit();
 
-        protected sealed override void Dispose()
-        {
-            base.Dispose();
-
-            DisposeView();
-        }
-
-        protected virtual void DisposeView()
-        {
-            
-        }
     }
 }
 

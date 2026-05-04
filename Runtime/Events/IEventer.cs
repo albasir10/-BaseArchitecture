@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace albatroneer.CoreArchitecture.Events
+namespace albatroneer.Core
 {
     public interface IEventer
     {
