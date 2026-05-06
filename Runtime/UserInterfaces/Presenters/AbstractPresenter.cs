@@ -15,15 +15,17 @@ namespace albatroneer.Core
         
         protected IEventer Eventer => _eventer;
 
-        protected sealed override UniTask<bool> Init()
+        protected sealed override async UniTask<bool> Init()
         {
             View = GetComponent<T>();
+
+            await View.TryInit();
             
             IsShowed = View.IsShow;
 
             PresenterInit(); 
             
-            return  UniTask.FromResult(true);
+            return true;
         }
         
         protected abstract void PresenterInit();

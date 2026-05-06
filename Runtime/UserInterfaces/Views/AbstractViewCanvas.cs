@@ -11,6 +11,10 @@ namespace albatroneer.Core
 
         public bool IsShow { get; private set; }
 
+        /// <summary>
+        /// Executed From Presenter
+        /// </summary>
+        /// <returns></returns>
         protected sealed override UniTask<bool> Init()
         {
             Canvas = GetComponent<Canvas>();
